@@ -144,6 +144,21 @@
     function keydownevent(e) {
       const el = document.querySelector(`#${e.code}`);
 
+      const rootStyles = window.getComputedStyle(el);
+      console.log(rootStyles.backgroundColor);
+
+      colorArr = [];
+      for (let i = 0; i < 3; i++) {
+        colorArr.push(parseInt(Math.random() * 256));
+      }
+      el.style.setProperty("--main-color", `rgb(${colorArr})`);
+      const luma =
+        0.2126 * colorArr[0] + 0.7152 * colorArr[1] + 0.0722 * colorArr[2];
+      el.style.setProperty(
+        "--font-color",
+        `${luma <= 155 ? "white" : "black"}`
+      );
+
       keydown.classList.add("check");
 
       el.classList.add("on");
